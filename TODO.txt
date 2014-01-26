@@ -1,7 +1,4 @@
-to install:
-
-South
-
-restart project
-set up proper directory structure and reset to git
-set up database properly
+todo:
+more detailed map of database structure
+create models
+figure out how to populate db
