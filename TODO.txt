@@ -1,0 +1,7 @@
+to install:
+
+South
+
+restart project
+set up proper directory structure and reset to git
+set up database properly
