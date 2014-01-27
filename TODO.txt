@@ -1,4 +1,10 @@
+database questions:
+can definitely do 1NF maybe 2NF, 3NF i don't understand fully
+when to use Null vs blank
+how to use foreign keys, onetoone fields
+
 todo:
+pip Pillow
 more detailed map of database structure
 create models
 figure out how to populate db
