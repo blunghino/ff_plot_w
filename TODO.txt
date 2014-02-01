@@ -4,7 +4,6 @@ when to use Null vs blank
 how to use foreign keys, onetoone fields
 
 todo:
-pip Pillow
-more detailed map of database structure
+more detailed map of database structure (excel)
 create models
 figure out how to populate db
