@@ -1,5 +1,6 @@
 from django.db import models
 
+# from .managers import PlayerManager, SeasonManager, GameManager
 # from teamdata.models import TeamSeason, TeamGame
 
 
@@ -16,7 +17,10 @@ class PlayerModel(models.Model):
 	height = models.PositiveSmallIntegerField('height in inches', null=True, blank=True)
 	weight = models.PositiveSmallIntegerField('weight in pounds', null=True, blank=True)
 	dob = models.DateField('date of birth', null=True, blank=True)
+	n_seasons = models.PositiveSmallIntegerField('number of seasons', null=True, blank=True)
 	college = models.CharField('college', max_length=100, null=True, blank=True)
+	
+# 	objects = PlayerManager()
 	
 	class Meta:
 		abstract = True
@@ -26,8 +30,12 @@ class SeasonModel(models.Model):
 	"""
 	an abstract base class: single season data fields applicable to all player positions
 	"""
-	number = models.PositiveSmallIntegerField(null=True, blank=True)
-	
+	number = models.PositiveSmallIntegerField('jersey number', null=True, blank=True)
+	games_played = models.PositiveSmallIntegerField('regular season games played', 
+													null=True, blank=True)
+
+# 	objects = SeasonManager()
+
 	class Meta:
 		abstract = True
 	
@@ -37,8 +45,11 @@ class GameModel(models.Model):
 	an abstract base class: single game data fields applicable to all player positions
 	"""
 	game_date = models.DateField('game date', null=True, blank=True)
-	home_game = models.NullBooleanField('home or away', null=True, blank=True)
+	home_game = models.NullBooleanField('home game', null=True, blank=True)
 	opponent = models.CharField('opponent', max_length=50, null=True, blank=True)	
+# 	day_of_week = models.CharField('day of week', max_length=10, null=True, blank=True)
+	
+# 	objects = GameManager()
 	
 	class Meta:
 		abstract = True
@@ -76,7 +87,7 @@ class RbSeason(SeasonModel):
 															   null=True, blank=True)
 	
 	def __str__(self):
-		return 'Rb: %s %s, %s' % (self.year_range, self.player.last_name, 
+		return 'Rb: %s: %s, %s' % (self.year_range, self.player.last_name, 
 							 	  self.player.first_name)
 	
 	
@@ -93,8 +104,9 @@ class RbGame(GameModel):
 															 null=True, blank=True)
 															 
 	def __str__(self):
-		return 'Rb: vs %s %s, %s' % (self.opponent, self.season.player.last_name, 
-									 self.season.player.first_name)
+		return 'Rb: %s vs %s: %s, %s' % (self.game_date, self.opponent, 
+										 self.season.player.last_name, 
+									     self.season.player.first_name)
 	
 ## QB CLASSES
 	
