@@ -23,6 +23,8 @@ PROJECT_ROOT = create_project_root("..", "..") # UNTESTED!!!
 
 STATIC_ROOT = add_to_project_root("static") # UNTESTED!!!
 
+TEMPLATE_DIRS = add_to_project_root("templates")
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 

@@ -1,7 +1,9 @@
 
 todo:
-build basic template architecture
-get views to display marshawn's career stats in a table
+learn how to add links and tables into html
+create a player index template and view
+create a player page template that to show career data in a table
+get views to connect marshawn's career stats to a player page with a table
 more detailed map of database structure (excel)
 figure out how to auto-populate db with scraped data (clues in forms?)
 create data display models (eg make a plot)

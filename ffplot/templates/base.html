@@ -1,8 +1,14 @@
 {# templates/base.html #}
 
-<!DOCTYPE html>
 <html>
 	<head>
-		<title>ff plot</title>
+		{% block title %}ff plot{% endblock title %}
 	</head>
+	<body>
+		{% block header %}
+			<h1>football plots and data</h1>
+		{% endblock header %}
+		{% block content %}
+		{% endblock content %}
+	</body>
 </html>

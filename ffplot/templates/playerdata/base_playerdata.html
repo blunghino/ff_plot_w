@@ -1,2 +1,18 @@
 {# templates/playerdata/base_playerdata.html #}
 {% extends "base.html" %}
+
+{% block header %}
+	{{ block.super }}
+	<h2>Players</h2>
+{% endblock header %}
+{% block content %}
+	{# list of player name hyper links #}
+	<ol>
+    {% for player in players_list %}
+        <li>
+        	<a href="{% url 'players_list' %}{{ player.last_name }}/">{{ player.last_name }}</a>
+        </li>
+    {% endfor %}
+    </ol>
+{% endblock content %}
+	
