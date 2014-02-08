@@ -6,5 +6,16 @@
 {% endblock header %}
 {% block content %}
 	{# data table here #}
-	<img src='{{ player.headshot }}'>
+	<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
+	<TR>
+	{% for field in field_names %}
+		<TH>{{ field }}</TH>
+	{% endfor %}
+	</TR>
+	<TR>
+	{% for data in field_data %}
+		<TH>{{ data }}</TH>
+	{% endfor %}
+	</TR>
+	</TABLE>
 {% endblock content %}
