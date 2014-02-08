@@ -1,9 +1,10 @@
 {# templates/playerdata/playerdata_career_detail.html #}
-{% extends "base_playerdata.html" %}
+{% extends "playerdata/base_playerdata.html" %}
 
 {% block header %}
-	{# player name here #}
+	<h2>{{ player.first_name }} {{ player.last_name }}</h2>
 {% endblock header %}
 {% block content %}
 	{# data table here #}
+	<img src='{{ player.headshot }}'>
 {% endblock content %}

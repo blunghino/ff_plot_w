@@ -10,7 +10,7 @@
 	<ol>
     {% for player in players_list %}
         <li>
-        	<a href="{% url 'players_list' %}{{ player.last_name }}/">{{ player.last_name }}</a>
+        	<a href="{% url 'playerdata:players_index' %}{{ player.last_name }}">{{ player.last_name }}</a>
         </li>
     {% endfor %}
     </ol>

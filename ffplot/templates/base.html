@@ -1,14 +1,22 @@
 {# templates/base.html #}
-
+<!DOCTYPE html>
 <html>
 	<head>
-		{% block title %}ff plot{% endblock title %}
+		{% block title %}<h1>ff plot</h1>{% endblock title %}
 	</head>
 	<body>
-		{% block header %}
-			<h1>football plots and data</h1>
-		{% endblock header %}
-		{% block content %}
-		{% endblock content %}
+		<div id="sidebar">
+        	<ul>
+            	{# <li><a href="/">Home</a></li> #}
+            	{# <li><a href="/blog/">Blog</a></li> #}
+        	</ul>
+    	</div>
+    	<div id="content">
+			{% block header %}
+			<h2>football plots and data</h2>
+			{% endblock header %}
+			{% block content %}
+			{% endblock content %}
+		</div>
 	</body>
 </html>
