@@ -1,11 +1,14 @@
 
 todo:
+detailed outline of website
+complete playerdata models
+learn css and put in style sheet
+show player image on career data page
 create a player page template to show career data in a table with links to season data
-testing
 more detailed map of database structure (excel)
 figure out how to auto-populate db with scraped data (clues in forms?)
 create data display models (eg make a plot and show it)
-
+create form to allow interactive selection of data to plot
 
 database questions:
 can definitely do 1NF maybe 2NF, 3NF i don't understand fully
