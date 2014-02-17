@@ -11,8 +11,8 @@
 		{# career table #}
 		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
 		<TR>
-		{% for field in career_field_names %}
-			<TH>{{ field }}</TH>
+		{% for field_name in career_field_names %}
+			<TH>{{ field_name }}</TH>
 		{% endfor %}
 		</TR>
 		<TR>
@@ -24,11 +24,10 @@
 	</div>
 	<h2>Data by season</h2>
 	<div>
-		{# career table #}
 		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
 		<TR>
-		{% for field in season_field_names %}
-			<TH>{{ field }}</TH>
+		{% for field_name in season_field_names %}
+			<TH>{{ field_name }}</TH>
 		{% endfor %}
 		</TR>
 		{% for data_list in season_field_data %}

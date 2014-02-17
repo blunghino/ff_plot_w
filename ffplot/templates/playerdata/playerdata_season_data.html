@@ -1,2 +1,41 @@
 {# templates/playerdata/playerdata_season_data.html #}
 {% extends "playerdata/base_playerdata.html" %}
+
+{% block header %}
+	<h2>{{ season.year }}: {{ season.player.first_name }} {{ season.player.last_name }}</h2>
+{% endblock header %}
+{% block content %}
+	<div>
+		{# season table #}
+		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
+		<TR>
+		{% for field_name in season_field_names %}
+			<TH>{{ field_name }}</TH>
+		{% endfor %}
+		</TR>
+		<TR>
+		{% for data in season_field_data %}
+			<td>{{ data }}</td>
+		{% endfor %}
+		</TR>
+		</TABLE>
+	</div>
+	<h2>Data by game</h2>
+	<div>
+		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
+		<TR>
+		{% for field_name in game_field_names %}
+			<TH>{{ field_name }}</TH>
+		{% endfor %}
+		</TR>
+		{% for data_list in game_field_data %}
+			<tr>
+			{% for data in data_list %}
+				<td>
+				{{ data }}
+				</td>
+			{% endfor %}
+			</tr>
+		{% endfor %}	
+	</div>
+{% endblock content %}
