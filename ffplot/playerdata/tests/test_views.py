@@ -40,6 +40,7 @@ class CareerdataviewTests(TestCase):
 		"""
 		if a player who does not exist is requested, redirect to a player not found page
 		"""
+		pass
 		
 		
 	def test_careerdataview_with_player_with_partial_data(self):

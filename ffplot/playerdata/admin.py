@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from playerdata.models import RbPlayer, RbSeason, RbGame
 
-admin.site.register(RbPlayer)
+class PlayerAdmin(admin.ModelAdmin):
+	prepopulated_fields = {'urlslug': ('position', 'first_name', 'last_name')}
+	
+admin.site.register(RbPlayer, PlayerAdmin)
 admin.site.register(RbSeason)
 admin.site.register(RbGame)

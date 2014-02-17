@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+
 
 # from .managers import PlayerManager, SeasonManager, GameManager
 # from teamdata.models import TeamSeason, TeamGame
@@ -10,16 +12,25 @@ class PlayerModel(models.Model):
 	"""
 	an abstract base class: career data fields applicable to all player positions
 	"""
-	headshot = models.ImageField('headshot', upload_to='player_headshots', null=True, blank=True)
+	headshot = models.ImageField('headshot', upload_to='media/player_headshots', 
+								 null=True, blank=True)
 	first_name = models.CharField('first name', max_length=50, null=True, blank=True)
 	last_name = models.CharField('last_name', max_length=50, null=True, blank=True)
-	position = models.CharField('position', max_length=50, null=True, blank=True)
+	position = models.CharField('position', max_length=2, null=True, blank=True, 
+								choices=
+							(('QB', 'Quarterback'), ('RB', 'Running Back'), 
+							('WR', 'Wide Receiver'), ('TE', 'Tight End'), ('K', 'Kicker'))
+							)
 	height = models.PositiveSmallIntegerField('height in inches', null=True, blank=True)
 	weight = models.PositiveSmallIntegerField('weight in pounds', null=True, blank=True)
 	dob = models.DateField('date of birth', null=True, blank=True)
 	n_seasons = models.PositiveSmallIntegerField('number of seasons', null=True, blank=True)
 	college = models.CharField('college', max_length=100, null=True, blank=True)
 	
+	urlslug = models.SlugField('urlslug', null=True, blank=True)
+		
+	def __str__(self):
+		return '%s: %s, %s' % (self.position, self.last_name, self.first_name)
 # 	objects = PlayerManager()
 	
 	class Meta:
@@ -33,7 +44,13 @@ class SeasonModel(models.Model):
 	number = models.PositiveSmallIntegerField('jersey number', null=True, blank=True)
 	games_played = models.PositiveSmallIntegerField('regular season games played', 
 													null=True, blank=True)
-
+	year = models.PositiveSmallIntegerField('season year', null=True, blank=True)	
+	
+	def __str__(self):
+		return '%s: %s: %s, %s' % (self.player.position, 
+								   self.year, 
+								   self.player.last_name, 
+							 	   self.player.first_name)
 # 	objects = SeasonManager()
 
 	class Meta:
@@ -48,6 +65,14 @@ class GameModel(models.Model):
 	home_game = models.NullBooleanField('home game', null=True, blank=True)
 	opponent = models.CharField('opponent', max_length=50, null=True, blank=True)	
 # 	day_of_week = models.CharField('day of week', max_length=10, null=True, blank=True)
+
+															 
+	def __str__(self):
+		return '%s: %s vs %s: %s, %s' % (self.season.player.position, 
+										 self.game_date, 
+										 self.opponent, 
+										 self.season.player.last_name, 
+									     self.season.player.first_name)
 	
 # 	objects = GameManager()
 	
@@ -69,8 +94,7 @@ class RbPlayer(PlayerModel):
 												 blank=True)
 	career_receptions = models.IntegerField('career receptions', null=True, blank=True)
 	
-	def __str__(self):
-		return 'Rb: %s, %s' % (self.last_name, self.first_name)
+
 	
 	
 class RbSeason(SeasonModel):
@@ -79,16 +103,10 @@ class RbSeason(SeasonModel):
 	"""
 	player = models.ForeignKey(RbPlayer)
 # 	team = models.ForeignKey(TeamSeason)
-	year_range = models.CharField('string of season year range', max_length=20, 
-								  null=True, blank=True)
 	season_rushing_yards = models.SmallIntegerField('season rushing yards', null=True, 
 													blank=True)
 	season_rushing_attempts = models.PositiveSmallIntegerField('season rushing attempts',
 															   null=True, blank=True)
-	
-	def __str__(self):
-		return 'Rb: %s: %s, %s' % (self.year_range, self.player.last_name, 
-							 	  self.player.first_name)
 	
 	
 class RbGame(GameModel):
@@ -102,11 +120,7 @@ class RbGame(GameModel):
 											    	blank=True)
 	game_rushing_attempts = models.PositiveSmallIntegerField('game rushing attempts', 
 															 null=True, blank=True)
-															 
-	def __str__(self):
-		return 'Rb: %s vs %s: %s, %s' % (self.game_date, self.opponent, 
-										 self.season.player.last_name, 
-									     self.season.player.first_name)
+
 	
 ## QB CLASSES
 	

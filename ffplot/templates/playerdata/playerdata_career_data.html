@@ -1,21 +1,50 @@
-{# templates/playerdata/playerdata_career_detail.html #}
+{# templates/playerdata/playerdata_career_data.html #}
 {% extends "playerdata/base_playerdata.html" %}
+
+{% load playerdata_custom_filters %}
 
 {% block header %}
 	<h2>{{ player.first_name }} {{ player.last_name }}</h2>
 {% endblock header %}
 {% block content %}
-	{# data table here #}
-	<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
-	<TR>
-	{% for field in field_names %}
-		<TH>{{ field }}</TH>
-	{% endfor %}
-	</TR>
-	<TR>
-	{% for data in field_data %}
-		<TH>{{ data }}</TH>
-	{% endfor %}
-	</TR>
-	</TABLE>
+	<div>
+		{# career table #}
+		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
+		<TR>
+		{% for field in career_field_names %}
+			<TH>{{ field }}</TH>
+		{% endfor %}
+		</TR>
+		<TR>
+		{% for data in career_field_data %}
+			<td>{{ data }}</td>
+		{% endfor %}
+		</TR>
+		</TABLE>
+	</div>
+	<div>
+		{# career table #}
+		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
+		<TR>
+		{% for field in season_field_names %}
+			<TH>{{ field }}</TH>
+		{% endfor %}
+		</TR>
+		{% for data_list in season_field_data %}
+			<tr>
+			{% for ii in season_field_numbers %}
+				<td>
+				{% if ii == 0 %}
+				{# first column is season id, needs hyperlink to game log #}				
+					<a href="{% url 'playerdata:players_index' %}{{ player.last_name }}/{{ data_list|get_at_index:ii }}">{{ data_list|get_at_index:ii }}</a>
+				{% else %}
+					{{ data_list|get_at_index:ii }}
+				{% endif %}
+				</td>
+			{% endfor %}
+			</tr>
+		{% endfor %}	
+	</div>
+	
+			
 {% endblock content %}
