@@ -22,6 +22,7 @@
 		</TR>
 		</TABLE>
 	</div>
+	<h2>Data by season</h2>
 	<div>
 		{# career table #}
 		<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3">
@@ -36,7 +37,7 @@
 				<td>
 				{% if ii == 0 %}
 				{# first column is season id, needs hyperlink to game log #}				
-					<a href="{% url 'playerdata:players_index' %}{{ player.last_name }}/{{ data_list|get_at_index:ii }}">{{ data_list|get_at_index:ii }}</a>
+					<a href="{% url 'playerdata:players_index' %}{{ player.urlslug }}/{{ data_list|get_at_index:ii }}">{{ data_list|get_at_index:ii }}</a>
 				{% else %}
 					{{ data_list|get_at_index:ii }}
 				{% endif %}

@@ -4,13 +4,17 @@ from django.core.urlresolvers import reverse
 from playerdata.models import RbPlayer
 
 
-def create_rbplayer(last_name='McKringleberry', first_name='Hingle', career_receptions=1000):
+def create_rbplayer(last_name='McKringleberry', first_name='Hingle', position='RB',
+					 career_receptions=1000):
 	"""
 	create an RbPlayer object with last_name and career_receptions fields populated
 	"""
+	urlslug = '%s_%s_%s' % (last_name.lower(), first_name.lower(), position.lower())
 	return RbPlayer.objects.create(last_name=last_name, 
 									first_name=first_name,
-							    	career_receptions=career_receptions)
+									position=position,
+									urlslug=urlslug,
+							    	career_receptions=career_receptions,)
 
 
 class RbPlayerViewTests(TestCase):
@@ -50,10 +54,7 @@ class CareerdataviewTests(TestCase):
 		"""
 		player = create_rbplayer()
 		response = self.client.get(reverse('playerdata:career_data', 
-										   kwargs={'player_name': player.last_name}))
+										   kwargs={'urlslug': player.urlslug}))
 		self.assertEqual(response.context['player'].last_name, 'McKringleberry')
-		self.assertEqual(response.context['field_names'],  
-						 ['career_rushing_yards', 'career_rushing_attempts', 
-						 'career_receiving_yards', 'career_receptions'])
-		self.assertEqual(response.context['field_data'][3], 1000)
-		self.assertIsNone(response.context['field_data'][0])
+		self.assertEqual(response.context['career_field_data'][2], 1000)
+		self.assertIsNone(response.context['career_field_data'][0])

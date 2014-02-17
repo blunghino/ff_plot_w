@@ -32,7 +32,7 @@ def careerdataview(request, urlslug):
 	return render(request, template_name, context)
 	
 	
-def seasondataview(request, player_name, year):
+def seasondataview(request, urlslug, year):
 	template_name = 'playerdata/playerdata_season_data.html'
 	context = {'year': year}
 	return render(request, template_name, context)
